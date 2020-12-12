@@ -1,6 +1,11 @@
-<div class="center jumbotron">
-  <div class="text-center">
-    <h1>Welcome to the Campposts</h1>
-    <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+<% if logged_in? %>   <!--Helperで定義-->
+  <p>ログイン完了ユーザ: <%= current_user.name %></p>  <!--Helperで定義-->
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome to the Campposts</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+      <%= link_to 'Log in!', login_path, class: 'btn btn-lg btn-primary' %>
+    </div>
   </div>
-</div>
+<% end %>
