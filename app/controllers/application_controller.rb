@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  include SessionsHelper  #Controller から Helper のメソッドを使うことはデフォルトではできません。
+  include SessionsHelper  #Controller から Helper のメソッドを使うことはデフォルトではできない。
   
   private
 
@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       redirect_to login_url
     end
+  end
+  
+  def counts(user)
+    @count_campposts = user.campposts.count
   end
 end
 

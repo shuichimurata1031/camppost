@@ -1,0 +1,23 @@
+<!-- 共通の View -->
+
+<ul class="list-unstyled">
+  <% campposts.each do |camppost| %>
+    <li class="media mb-3">
+      <img class="mr-2 rounded" src="<%= gravatar_url(camppost.user, { size: 50 }) %>" alt="">
+      <div class="media-body">
+        <div>
+          <%= link_to camppost.user.name, user_path(camppost.user) %> <span class="text-muted">posted at <%= camppost.created_at %></span>
+        </div>
+        <div>
+          <p><%= camppost.content %></p>
+        </div>
+        <div>
+          <% if current_user == camppost.user %>
+            <%= link_to "Delete", camppost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <%= paginate campposts %>
+</ul>
