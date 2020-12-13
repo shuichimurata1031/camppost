@@ -1,13 +1,9 @@
 <% if logged_in? %>   <!--Helperで定義-->
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>  <!--Helperで定義-->
+  <p>ログインユーザー: <%= current_user.name %></p>  <!--Helperで定義-->
     <div class="row">
-      <aside class="col-sm-4">
-        <%= form_with(model: @camppost, local: true) do |f| %>
-          <div class="form-group">
-            <%= f.text_area :content, class: 'form-control', rows: 5 %>
-          </div>
-          <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
-        <% end %>
+      <aside class="col-sm-4 mb-3">
+        <h2>キャンプの思い出を投稿しましょう</h2>
+        <%= render 'campposts/form', camppost: @camppost %>
       </aside>
     <div class="col-sm-8">
       <%= render 'campposts/campposts', campposts: @campposts %>
@@ -17,6 +13,7 @@
   <div class="center jumbotron">
     <div class="text-center">
       <h1>Welcome to the Campposts</h1>
+      <p>キャンプに行った思い出を投稿して、シェアするサービスです。</p>
       <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
       <%= link_to 'Log in!', login_path, class: 'btn btn-lg btn-primary' %>
     </div>

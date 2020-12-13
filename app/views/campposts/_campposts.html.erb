@@ -1,5 +1,4 @@
 <!-- 共通の View -->
-
 <ul class="list-unstyled">
   <% campposts.each do |camppost| %>
     <li class="media mb-3">
@@ -13,6 +12,7 @@
         </div>
         <div>
           <% if current_user == camppost.user %>
+            <%= link_to "Update", edit_camppost_path(camppost), class: 'btn btn-warning btn-sm' %>
             <%= link_to "Delete", camppost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
           <% end %>
         </div>

@@ -1,6 +1,6 @@
 class CamppostsController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
   def create
     @camppost = current_user.campposts.build(camppost_params)
@@ -15,9 +15,22 @@ class CamppostsController < ApplicationController
   end
 
   def edit
+    #@camppost.edit
   end
 
+  #def update
+    #@camppost.update
+    #flash[:success] = '投稿を編集しました。'
+    #redirect_back(fallback_location: root_path)
+  #end
   def update
+    if @camppost.update(camppost_params)
+      flash[:success] = '正常に更新されました'
+      redirect_to edit_camppost_url(@camppost)
+    else
+      flash.now[:danger] = '更新されませんでした'
+      render :edit
+    end
   end
 
   def destroy
@@ -29,7 +42,7 @@ class CamppostsController < ApplicationController
   private
   
   def camppost_params
-    params.require(:camppost).permit(:content)
+    params.require(:camppost).permit(:content, :address)
   end
     
   def correct_user

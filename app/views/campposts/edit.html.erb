@@ -1,2 +1,5 @@
-<h1>Campposts#edit</h1>
-<p>Find me in app/views/campposts/edit.html.erb</p>
+<h1>id: <%= @camppost.id %> の投稿編集ページ</h1>
+
+<%= render 'form', camppost: @camppost %>
+
+<%= link_to '一覧に戻る', root_path %>
