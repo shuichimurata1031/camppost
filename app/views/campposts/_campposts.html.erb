@@ -8,6 +8,7 @@
           <%= link_to camppost.user.name, user_path(camppost.user) %> <span class="text-muted">posted at <%= camppost.created_at %></span>
         </div>
         <div>
+          <p><%= camppost.address %></p>
           <p><%= camppost.content %></p>
         </div>
         <div>

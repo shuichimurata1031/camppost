@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
       redirect_to @user
+      #処理を users#show のアクションへと強制的に移動させる。更に show アクションが実行され、show.html.erb が呼ばれる。
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
