@@ -18,11 +18,6 @@ class CamppostsController < ApplicationController
     #@camppost.edit
   end
 
-  #def update
-    #@camppost.update
-    #flash[:success] = '投稿を編集しました。'
-    #redirect_back(fallback_location: root_path)
-  #end
   def update
     if @camppost.update(camppost_params)
       flash[:success] = '正常に更新されました'
@@ -42,7 +37,7 @@ class CamppostsController < ApplicationController
   private
   
   def camppost_params
-    params.require(:camppost).permit(:content, :address)
+    params.require(:camppost).permit(:content, :address, :image)
   end
     
   def correct_user

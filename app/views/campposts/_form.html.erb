@@ -1,3 +1,4 @@
+  <!--投稿ページ、右側に一覧-->
 <%= form_with(model: camppost, local: true) do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
   <div class="form-group">
@@ -8,5 +9,9 @@
     <%= f.label :content, "説明文" %>
     <%= f.text_area :content, class: 'form-control', rows: 5 %>
   </div>
-  <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
+  <div class="form-group">
+    <%= f.label :image, "画像をアップロード" %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
+  <%= f.submit 'post', class: 'btn btn-primary btn-block' %>
 <% end %>

@@ -1,4 +1,4 @@
-<!-- 共通の View -->
+  <!-- 共通の View -->
 <ul class="list-unstyled">
   <% campposts.each do |camppost| %>
     <li class="media mb-3">
@@ -8,8 +8,10 @@
           <%= link_to camppost.user.name, user_path(camppost.user) %> <span class="text-muted">posted at <%= camppost.created_at %></span>
         </div>
         <div>
-          <p><%= camppost.address %></p>
-          <p><%= camppost.content %></p>
+          <!--投稿を表示するviewにて、画像表示用の以下コードを追加。-->
+          <p></p><strong>場所:</strong>camppost.address %></p>
+          <p><strong>説明:</strong><%= camppost.content %></p>
+          <p><strong>写真:</strong><%= image_tag camppost.image.url if camppost.image? %></p>
         </div>
         <div>
           <% if current_user == camppost.user %>
