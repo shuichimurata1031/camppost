@@ -8,7 +8,7 @@ class CamppostsController < ApplicationController
       flash[:success] = '投稿しました。'
       redirect_to root_url
     else
-      @campposts = current_user.campposts.order(id: :desc).page(params[:page])
+      @campposts = current_user.feed_campposts.order(id: :desc).page(params[:page])
       flash.now[:danger] = '投稿に失敗しました。'
       render 'toppages/index'
     end
