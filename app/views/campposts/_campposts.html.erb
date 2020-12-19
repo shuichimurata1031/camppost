@@ -9,7 +9,7 @@
         </div>
         <div>
           <!--投稿を表示するviewにて、画像表示用の以下コードを追加。-->
-          <p></p><strong>場所:</strong>camppost.address %></p>
+          <p></p><strong>場所:</strong>camppost.address %></p>  <!--なぜ@camppostじゃないの？-->
           <p><strong>説明:</strong><%= camppost.content %></p>
           <p><strong>写真:</strong><%= image_tag camppost.image.url if camppost.image? %></p>
         </div>

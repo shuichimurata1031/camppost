@@ -58,3 +58,5 @@ group :production do
 end
 
 gem 'carrierwave'
+
+  #gem 'rmagick'　#画像のサイズとか整えるやつ
