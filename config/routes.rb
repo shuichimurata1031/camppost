@@ -11,10 +11,11 @@ Rails.application.routes.draw do
     member do
       get :followings
       get :followers
+      get :likes
     end
   end
   
-  get 'signup', to: 'users#new'
-  resources :users, only: [:index, :show, :new, :create]
   resources :campposts, only: [:create, :edit, :update, :destroy]
+  resources :relationships, only: [:create, :destroy]
+  resources :favorites, only: [:create, :destroy]
 end

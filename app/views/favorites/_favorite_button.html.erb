@@ -1,0 +1,11 @@
+<% if current_user.favoriting?(camppost) %>
+  <%= form_with(model: current_user.favorites.find_by(camppost_id: camppost.id), local: true, method: :delete) do |f| %>
+    <%= hidden_field_tag :camppost_id, camppost.id %>
+    <%= f.submit '行きたい を外す', class: 'btn btn-danger btn-block' %>
+  <% end %>
+<% else %>
+  <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+    <%= hidden_field_tag :camppost_id, camppost.id %>
+    <%= f.submit '行きたい！', class: 'btn btn-primary btn-block' %>
+  <% end %>
+<% end %>

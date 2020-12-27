@@ -7,11 +7,14 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :campposts
+  
   has_many :relationships
   has_many :followings, through: :relationships, source: :follow
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relationship, source: :user
   #フォローの関係を表すModel
+  has_many :favorites
+  has_many :favorite_campposts, through: :favorites, source: :camppost
   
   #フォローの関係を手軽に作成したり外したりするためのメソッド
   def follow(other_user)
@@ -29,8 +32,20 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
   
+  def favorite(camppost)
+    self.favorites.find_or_create_by(camppost_id: camppost.id)
+  end
+
+  def unfavorite(camppost)
+    favorite = self.favorites.find_by(camppost_id: camppost.id)
+    favorite.destroy if favorite
+  end
+  
+  def favoriting?(camppost)
+    self.favorite_campposts.include?(camppost)
+  end
+  
   def feed_campposts #timeline
     Camppost.where(user_id: self.following_ids + [self.id])
   end
-  
 end

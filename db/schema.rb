@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_18_085614) do
+ActiveRecord::Schema.define(version: 2020_12_27_050730) do
 
   create_table "campposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "content"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2020_12_18_085614) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.index ["user_id"], name: "index_campposts_on_user_id"
+  end
+
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "camppost_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camppost_id"], name: "index_favorites_on_camppost_id"
+    t.index ["user_id", "camppost_id"], name: "index_favorites_on_user_id_and_camppost_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -41,6 +51,8 @@ ActiveRecord::Schema.define(version: 2020_12_18_085614) do
   end
 
   add_foreign_key "campposts", "users"
+  add_foreign_key "favorites", "campposts"
+  add_foreign_key "favorites", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
 end
